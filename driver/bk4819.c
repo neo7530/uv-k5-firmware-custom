@@ -126,6 +126,16 @@ void BK4819_Init(void)
 
 	BK4819_WriteRegister(BK4819_REG_33, 0x9000);
 	BK4819_WriteRegister(BK4819_REG_3F, 0);
+
+#ifdef ENABLE_DIGITAL_MODULATION
+	// When digital modes are possible, the MIC ADC must be enabled for a bit
+	// in order to ensure the proper DC bias is reached on the BK4819 MIC line.
+	// This must occur with Rx DSP disabled. The delay required is dependent
+	// on the value of C77. 250ms is appropriate for a 1uF capitor. The delay
+	// scales linearly with the size of the capcitory. 2.5s is needed for 10uF.
+	BK4819_WriteRegister(BK4819_REG_30, 4);
+	SYSTEM_DelayMs(250);
+#endif
 }
 
 static uint16_t BK4819_ReadU16(void)
