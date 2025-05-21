@@ -1214,7 +1214,7 @@ void BK4819_PrepareDigitalTransmit(const BK4819_FilterBandwidth_t Bandwidth)
 			break;
 		case BK4819_FILTER_BW_WIDE:
 		case BK4819_FILTER_BW_DIGITAL_WIDE:
-			BK4819_WriteRegister(BK4819_REG_40, (gBK4819_DefaultDeviation & 0xE000) | 0x1383);
+			BK4819_WriteRegister(BK4819_REG_40, (gBK4819_DefaultDeviation & 0xE000) | 0x1470); //EDIT FOR POCSAG
 			break;
 	}
 
